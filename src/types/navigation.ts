@@ -1,9 +1,11 @@
-import type { StackScreenProps } from '@react-navigation/stack';
+import { HomeScreen } from "@/screens";
+import type { StackScreenProps } from "@react-navigation/stack";
 
 export type ApplicationStackParamList = {
-	Startup: undefined;
-	Example: undefined;
+  Home: undefined;
+  Profile: undefined;
+  Camera: undefined;
 };
 
 export type ApplicationScreenProps =
-	StackScreenProps<ApplicationStackParamList>;
+  StackScreenProps<ApplicationStackParamList>;

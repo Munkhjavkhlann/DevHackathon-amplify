@@ -1,0 +1,70 @@
+import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { useTranslation } from "react-i18next";
+
+import { SafeScreen } from "@/components/template";
+import { useTheme } from "@/theme";
+
+import {
+  Camera as Camera1,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
+} from "react-native-vision-camera";
+
+function Camera() {
+  const device = useCameraDevice("back", {
+    physicalDevices: [
+      "ultra-wide-angle-camera",
+      "wide-angle-camera",
+      "telephoto-camera",
+    ],
+  });
+  const { hasPermission, requestPermission } = useCameraPermission();
+  console.log("has permission : ", hasPermission);
+
+  useEffect(() => {
+    if (!hasPermission) {
+      requestPermission();
+    }
+  }, [hasPermission]);
+
+  if (!hasPermission) {
+    return <ActivityIndicator />;
+  }
+
+  if (!device) {
+    return <Text>Camera device not found</Text>;
+  }
+  // const codeScanner = useCodeScanner({
+  //   codeTypes: ["qr", "ean-13"],
+  //   onCodeScanned: (codes: any) => {
+  //     console.log(`Scanned ${codes.length} codes!`);
+  //   },
+  // });
+
+  // useEffect(() => {
+  //   requestPermission();
+  // }, []);
+  // if (device == null)
+  //   return (
+  //     <View>
+  //       <Text>Device not found</Text>
+  //     </View>
+  //   );
+  return (
+    <SafeScreen>
+      <View>
+        <Text>Camera</Text>
+      </View>
+      <Camera1
+        style={StyleSheet.absoluteFill}
+        device={device}
+        isActive={true}
+        // codeScanner={codeScanner}
+      />
+    </SafeScreen>
+  );
+}
+
+export default Camera;

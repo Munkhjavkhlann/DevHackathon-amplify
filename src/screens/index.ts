@@ -1,2 +1,3 @@
-export { default as Startup } from './Startup/Startup';
-export { default as Example } from './Example/Example';
+export { default as HomeScreen} from "./HomeScreen/HomeScreen";
+export { default as Profile } from "./Profile/Profile";
+export { default as Camera } from "./Camera/Camera";
